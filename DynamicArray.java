@@ -1,18 +1,18 @@
 class DynamicArray
 {
-    int insertionPoint;
     Object[] items;
+    int insertionPoint;
     
     DynamicArray()
     {
-        insertionPoint = 0;
         items = new Object[10];
+        insertionPoint = 0;
     }
     
     /**
-     * Returns the current "size" of the array.
+     * Returns the number of items actually in the array.
      * 
-     * This is different than the actual capacity.
+     * This is different than the capacity of the array.
      */
     int size()
     {
@@ -27,31 +27,32 @@ class DynamicArray
         items[insertionPoint] = obj;
         
         insertionPoint++;
-        //TODO: Expand the array if the insertion point reaches the end
         
-        if (insertionPoint == items.length)
+        //TODO: expand the array if the insertionPoint goes past the end
+        
+        if (insertionPoint >= items.length)
         {
             expand();
         }
-        
     }
     
     /**
-     * Remove the item at the end of the array.
+     * Remove the last item from the array.
      */
     void remove()
     {
         items[insertionPoint - 1] = null;
+        
         insertionPoint--;
     }
     
     /**
-     * Double the size of the current array.
+     * Double the size of the array.
      * 
      * Algorithm:
-     * Create a new array double the size of the current one
-     * Copy items over one by one
-     * Make items equal to the expanded array.
+     * Make a new array that is double the size of "items".
+     * Copy over the items one by one into the new array
+     * Set items equal to the expanded array
      */
     void expand()
     {
@@ -63,5 +64,17 @@ class DynamicArray
         }
         
         items = expandedArray;
+    }
+    
+    /**
+     * Retrieve the object at the given index.
+     */
+    Object get(int index)
+    {
+        if (index < 0 || index > insertionPoint)
+        {
+            throw new IllegalArgumentException("Index out of bounds.");
+        }
+        return items[index];
     }
 }
