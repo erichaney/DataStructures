@@ -1,18 +1,18 @@
 class DynamicArray
 {
-    Object[] items;
     int insertionPoint;
+    Object[] items;
     
     DynamicArray()
     {
-        items = new Object[10];
         insertionPoint = 0;
+        items = new Object[10];
     }
     
     /**
-     * Returns the number of items actually in the array.
+     * Returns the current "size" of the array.
      * 
-     * This is different than the capacity of the array.
+     * This is different than the actual capacity.
      */
     int size()
     {
@@ -27,32 +27,31 @@ class DynamicArray
         items[insertionPoint] = obj;
         
         insertionPoint++;
+        //Expand the array if the insertion point reaches the end
         
-        //TODO: expand the array if the insertionPoint goes past the end
-        
-        if (insertionPoint >= items.length)
+        if (insertionPoint == items.length)
         {
             expand();
         }
+        
     }
     
     /**
-     * Remove the last item from the array.
+     * Remove the item at the end of the array.
      */
     void remove()
     {
         items[insertionPoint - 1] = null;
-        
         insertionPoint--;
     }
     
     /**
-     * Double the size of the array.
+     * Double the size of the current array.
      * 
      * Algorithm:
-     * Make a new array that is double the size of "items".
-     * Copy over the items one by one into the new array
-     * Set items equal to the expanded array
+     * Create a new array double the size of the current one
+     * Copy items over one by one
+     * Make items equal to the expanded array.
      */
     void expand()
     {
@@ -67,14 +66,58 @@ class DynamicArray
     }
     
     /**
-     * Retrieve the object at the given index.
+     * Return the object at the given index.
      */
     Object get(int index)
     {
-        if (index < 0 || index > insertionPoint)
+        if (index < 0 || index >= insertionPoint)
         {
             throw new IllegalArgumentException("Index out of bounds.");
         }
         return items[index];
+    }
+    
+    /**
+     * Overwrite the object at the given index with a given object.
+     */
+    void set(int index, Object obj)
+    {
+        if (index < 0 || index >= insertionPoint)
+        {
+            throw new IllegalArgumentException("Index out of bounds.");
+        }
+        
+        items[index] = obj;
+    }
+    
+    /**
+     * Insert the given object at the given index.
+     * 
+     * Algorithm:
+     * Starting at the end of the array, move over each item to the right
+     * Insert the given object at the given index
+     * Increment the insertion point
+     * Check whether we need to expand the array
+     */
+    void insert(int index, Object obj)
+    {
+         if (index < 0 || index > insertionPoint)
+        {
+            throw new IllegalArgumentException("Index out of bounds.");
+        }
+        
+        for (int i = insertionPoint; i >= index; i--)
+        {
+            items[i] = items[i - 1];
+        }
+        
+        items[index] = obj;
+        
+        insertionPoint++;
+        
+        if (insertionPoint == items.length)
+        {
+            expand();
+        }
     }
 }
