@@ -1,3 +1,11 @@
+/**
+* DynamicArray is our in-class attempt to make an ArrayList from scratch.
+*
+* The main features of DynamicArray: 
+*  - it keeps track of its sizewit h a number called 'insertionPoint'
+*  - it expands whenever we would need to add a new item beyond its capacity
+*
+*/
 class DynamicArray
 {
     int insertionPoint;
@@ -99,7 +107,7 @@ class DynamicArray
      * Increment the insertion point
      * Check whether we need to expand the array
      */
-    void insert(int index, Object obj)
+    void add(int index, Object obj)
     {
          if (index < 0 || index > insertionPoint)
         {
