@@ -24,4 +24,20 @@ class ArrayListExamples
            System.out.println(m);
        }
     }
+    
+    static void lottoNumbers()
+    {
+        ArrayList<Integer> lotto = new ArrayList<Integer>();
+        
+        for (int i = 0; i < 5; i++)
+        {
+            int randomNum = (int) (Math.random() * 100);
+            lotto.add(randomNum);
+        }
+        
+        for (int n : lotto)
+        {
+            System.out.println(n);
+        }
+    }
 }
