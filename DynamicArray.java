@@ -2,7 +2,7 @@
 * DynamicArray is our in-class attempt to make an ArrayList from scratch.
 *
 * The main features of DynamicArray: 
-*  - it keeps track of its sizewit h a number called 'insertionPoint'
+*  - it keeps track of its size with a number called 'insertionPoint'
 *  - it expands whenever we would need to add a new item beyond its capacity
 *
 */
